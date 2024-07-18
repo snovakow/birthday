@@ -2,6 +2,7 @@ body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-weight: normal;
 	overflow-x: visible;
+	background-image: linear-gradient(to right, #ffefee 0%, white, #ffefee 100%);
 }
 
 .mainContainer {
@@ -52,7 +53,8 @@ body {
 }
 
 .stats {
-	border-color: or;
+	border-color: black;
+	background-color: white;
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 16px;

@@ -14,4 +14,4 @@ const appInitialize = (title, version, css) => {
 
 	console.log(title + " Version: " + version);
 }
-appInitialize("Raya Papaya", "0.1.1", "main.css");
+appInitialize("Raya Papaya", "0.1.2", "main.css");
