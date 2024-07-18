@@ -67,18 +67,15 @@ add(stats, makeText(leadup), secondsHolder, makeText(" seconds old")).className 
 
 display.appendChild(statsBacking);
 
-const mainAge = document.createElement('div');
-mainAge.className = 'mainAge';
+const exactAgeHolder = document.createElement('div');
+exactAgeHolder.className = 'exactAge';
 
-const mainAgeSub = makeText("years old!!!");
-mainAgeSub.className = 'mainAgeSub';
+const exactAgeSub = makeText("years old!!!");
+exactAgeSub.className = 'exactAgeSub';
 
-const mainAgeContainer = add(display, mainAge, mainAgeSub);
-mainAgeContainer.className = 'mainAgeContainer';
+const exactAgeContainer = add(display, exactAgeHolder, exactAgeSub);
+exactAgeContainer.className = 'exactAgeContainer';
 
-let prevYearString = "";
-let prevSecondString = "";
-let prevMinuteString = "";
 const prevValues = new Map();
 
 function step(timeStamp) {
@@ -130,7 +127,7 @@ function step(timeStamp) {
 	applyChanged('weeks', weeksHolder, () => weeks.toLocaleString());
 	applyChanged('monthAge', monthAgeHolder, () => monthAge.toLocaleString());
 	applyChanged('age', ageHolder, () => age.toLocaleString());
-	applyChanged('exactAge', mainAge, () => exactAge.toFixed(8));
+	applyChanged('exactAge', exactAgeHolder, () => exactAge.toFixed(8));
 
 	window.requestAnimationFrame(step);
 }

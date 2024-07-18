@@ -70,18 +70,18 @@ body {
 	text-align: left;
 }
 
-.mainAgeContainer {
+.exactAgeContainer {
 	padding: 24px;
 	font-weight: bold;
 	text-align: center;
 }
 
-.mainAge {
+.exactAge {
 	font-family: 'Courier New', monospace;
 	font-size: 3.0em;
 	text-shadow: 2px 2px 2px darkgrey;
 }
 
-.mainAgeSub {
+.exactAgeSub {
 	font-size: 2em;
 }
