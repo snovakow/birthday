@@ -11,6 +11,7 @@ body {
 	flex-direction: column;
 	top: 0px;
 	left: 50%;
+	bottom: 0px;
 	overflow-y: auto;
 	transform: translateX(-50%);
 	transform-origin: top;
