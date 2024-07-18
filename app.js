@@ -1,12 +1,83 @@
 const birth = new Date("2013-07-18T12:38:00.000-04:00");
 
-const locale = undefined;// undefined "fa-IR";
-
 const display = document.createElement('div');
 document.body.appendChild(display);
 
-function step(timeStamp) {
+const makeNumber = () => {
+	const backing = document.createElement('span');
+	backing.className = 'number';
+	return backing;
+}
+const makeText = (text) => {
+	const backing = document.createElement('span');
+	backing.appendChild(document.createTextNode(text));
+	return backing;
+}
+const add = (parent, ...args) => {
+	const backing = document.createElement('div');
+	for (const arg of args) backing.appendChild(arg);
+	parent.appendChild(backing);
+	return backing;
+}
 
+const output = "Born " + birth.toLocaleString(undefined, {
+	day: 'numeric',
+	month: 'long',
+	year: 'numeric',
+	hour: 'numeric',
+	minute: 'numeric',
+});
+
+const titleBacking = document.createElement('div');
+titleBacking.className = 'titleBacking';
+display.appendChild(titleBacking);
+
+const title = document.createElement('span');
+title.appendChild(document.createTextNode("Raya Papaya"));
+title.className = 'title';
+titleBacking.appendChild(title);
+
+const subtitle = add(display, makeText(output));
+subtitle.className = 'subtitle';
+
+const leadup = "Raya Papaya is... ";
+
+const statsBacking = document.createElement('div');
+statsBacking.className = 'statsBacking';
+const stats = document.createElement('div');
+stats.className = 'stats';
+statsBacking.appendChild(stats);
+
+const ageHolder = makeNumber();
+const monthAgeHolder = makeNumber();
+const weeksHolder = makeNumber();
+const daysHolder = makeNumber();
+const hoursHolder = makeNumber();
+const minutesHolder = makeNumber();
+const secondsHolder = makeNumber();
+add(stats, makeText(leadup), ageHolder, makeText(" years old")).className = 'stat';
+add(stats, makeText(leadup), monthAgeHolder, makeText(" months old")).className = 'stat';
+add(stats, makeText(leadup), weeksHolder, makeText(" weeks old")).className = 'stat';
+add(stats, makeText(leadup), daysHolder, makeText(" days old")).className = 'stat';
+add(stats, makeText(leadup), hoursHolder, makeText(" hours old")).className = 'stat';
+add(stats, makeText(leadup), minutesHolder, makeText(" minutes old")).className = 'stat';
+add(stats, makeText(leadup), secondsHolder, makeText(" seconds old")).className = 'stat';
+
+display.appendChild(statsBacking);
+
+const mainAge = document.createElement('div');
+mainAge.className = 'mainAge';
+
+const mainAgeSub = makeText("years old!!!");
+mainAgeSub.className = 'mainAgeSub';
+
+const mainAgeContainer = add(display, mainAge, mainAgeSub);
+mainAgeContainer.className = 'mainAgeContainer';
+
+let prevYearString = "";
+let prevSecondString = "";
+
+function step(timeStamp) {
 	const now = new Date();
 	const diff = now - birth;
 
@@ -37,73 +108,34 @@ function step(timeStamp) {
 		percent = (now - birthday) / (nextBirthday - birthday);
 	}
 
-	const makeNumber = (num) => {
-		const backing = document.createElement('span');
-		backing.className = 'number';
-		backing.appendChild(document.createTextNode(num));
-		return backing;
-	}
-	const makeText = (text) => {
-		const backing = document.createElement('span');
-		backing.appendChild(document.createTextNode(text));
-		return backing;
-	}
-	const add = (parent, ...args) => {
-		const backing = document.createElement('div');
-		for (const arg of args) backing.appendChild(arg);
-		parent.appendChild(backing);
-		return backing;
-	}
-
 	const exactAge = age + percent;
 
-	while (display.firstChild) display.removeChild(display.firstChild);
+	const yearString = exactAge.toFixed(8);
+	const secondString = seconds.toLocaleString();
 
-	const output = "Born " + birth.toLocaleString(locale, {
-		day: 'numeric',
-		month: 'long',
-		year: 'numeric',
-		hour: 'numeric',
-		minute: 'numeric',
-	});
-
-	const titleBacking = document.createElement('div');
-	titleBacking.className = 'titleBacking';
-	display.appendChild(titleBacking);
-
-	const title = document.createElement('span');
-	title.appendChild(document.createTextNode("Raya Papaya"));
-	title.className = 'title';
-	titleBacking.appendChild(title);
-
-	const subtitle = add(display, makeText(output));
-	subtitle.className = 'subtitle';
-
-	const leadup = "Raya Papaya is... ";
-
-	const statsBacking = document.createElement('div');
-	statsBacking.className = 'statsBacking';
-	const stats = document.createElement('div');
-	stats.className = 'stats';
-	statsBacking.appendChild(stats);
-
-	display.appendChild(statsBacking);
-
-	add(stats, makeText(leadup), makeNumber(age.toLocaleString(locale)), makeText(" years old")).className = 'stat';
-	add(stats, makeText(leadup), makeNumber(monthAge.toLocaleString(locale)), makeText(" months old")).className = 'stat';
-	add(stats, makeText(leadup), makeNumber(weeks.toLocaleString(locale)), makeText(" weeks old")).className = 'stat';
-	add(stats, makeText(leadup), makeNumber(days.toLocaleString(locale)), makeText(" days old")).className = 'stat';
-	add(stats, makeText(leadup), makeNumber(hours.toLocaleString(locale)), makeText(" hours old")).className = 'stat';
-	add(stats, makeText(leadup), makeNumber(minutes.toLocaleString(locale)), makeText(" minutes old")).className = 'stat';
-	add(stats, makeText(leadup), makeNumber(seconds.toLocaleString(locale)), makeText(" seconds old")).className = 'stat';
-
-	const fullAge = document.createElement('div');
-	display.appendChild(fullAge);
-
-	const mainAge = add(fullAge, makeNumber(exactAge.toFixed(10)), makeText(" years old!!!"));
-	mainAge.className = 'mainAge';
+	if (yearString !== prevYearString || secondString !== prevSecondString) {
+		ageHolder.innerText = age.toLocaleString();
+		monthAgeHolder.innerText = monthAge.toLocaleString();
+		weeksHolder.innerText = weeks.toLocaleString();
+		daysHolder.innerText = days.toLocaleString();
+		hoursHolder.innerText = hours.toLocaleString();
+		minutesHolder.innerText = minutes.toLocaleString();
+		secondsHolder.innerText = secondString;
+		mainAge.innerText = yearString;
+	}
+	prevYearString = yearString;
+	prevSecondString = secondString;
 
 	window.requestAnimationFrame(step);
 }
 
-window.requestAnimationFrame(step);
+step();
+
+const resize = () => {
+	const max = 520;
+	const width = window.innerWidth;
+	if (width < max) document.body.style.transform = `scale(${width / max})`;
+	else document.body.style.transform = "none";
+}
+resize();
+window.addEventListener('resize', resize);
