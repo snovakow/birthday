@@ -1,6 +1,8 @@
 const birth = new Date("2013-07-18T12:38:00.000-04:00");
 
 const display = document.createElement('div');
+display.className = "mainContainer";
+
 document.body.appendChild(display);
 
 const makeNumber = () => {
@@ -132,10 +134,10 @@ function step(timeStamp) {
 step();
 
 const resize = () => {
-	const max = 520;
+	const max = 576;
 	const width = window.innerWidth;
-	if (width < max) document.body.style.transform = `scale(${width / max})`;
-	else document.body.style.transform = "none";
+	display.style.transform = "translateX(-50%)";
+	if (width < max) display.style.transform += ` scale(${width / max})`;
 }
 resize();
 window.addEventListener('resize', resize);
