@@ -78,6 +78,8 @@ mainAgeContainer.className = 'mainAgeContainer';
 
 let prevYearString = "";
 let prevSecondString = "";
+let prevMinuteString = "";
+const prevValues = new Map();
 
 function step(timeStamp) {
 	const now = new Date();
@@ -112,21 +114,23 @@ function step(timeStamp) {
 
 	const exactAge = age + percent;
 
-	const yearString = exactAge.toFixed(8);
-	const secondString = seconds.toLocaleString();
-
-	if (yearString !== prevYearString || secondString !== prevSecondString) {
-		ageHolder.innerText = age.toLocaleString();
-		monthAgeHolder.innerText = monthAge.toLocaleString();
-		weeksHolder.innerText = weeks.toLocaleString();
-		daysHolder.innerText = days.toLocaleString();
-		hoursHolder.innerText = hours.toLocaleString();
-		minutesHolder.innerText = minutes.toLocaleString();
-		secondsHolder.innerText = secondString;
-		mainAge.innerText = yearString;
+	const applyChanged = (key, element, getter) => {
+		const value = getter();
+		const prevValue = prevValues.get(key);
+		if (value !== prevValue) {
+			element.innerText = value;
+			prevValues.set(key, value);
+		}
 	}
-	prevYearString = yearString;
-	prevSecondString = secondString;
+
+	applyChanged('seconds', secondsHolder, () => seconds.toLocaleString());
+	applyChanged('minutes', minutesHolder, () => minutes.toLocaleString());
+	applyChanged('hours', hoursHolder, () => hours.toLocaleString());
+	applyChanged('days', daysHolder, () => days.toLocaleString());
+	applyChanged('weeks', weeksHolder, () => weeks.toLocaleString());
+	applyChanged('monthAge', monthAgeHolder, () => monthAge.toLocaleString());
+	applyChanged('age', ageHolder, () => age.toLocaleString());
+	applyChanged('exactAge', mainAge, () => exactAge.toFixed(8));
 
 	window.requestAnimationFrame(step);
 }
