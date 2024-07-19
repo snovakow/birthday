@@ -5,17 +5,26 @@ body {
 	background-color: #ffefee;
 }
 
+.mainBacking {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	overflow-x: visible;
+	overflow-y: auto;
+}
+
 .mainContainer {
 	position: absolute;
 	display: flex;
 	flex-direction: column;
 	top: 0px;
 	left: 50%;
-	bottom: 0px;
-	overflow-y: auto;
+	min-height: 100%;
+	overflow: visible;
 	transform: translateX(-50%);
 	transform-origin: top;
-	padding-bottom: 48px;
 	background-image: linear-gradient(to right, #ffefee 0%, white, #ffefee 100%);
 }
 

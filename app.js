@@ -1,9 +1,14 @@
 const birth = new Date("2013-07-18T12:38:00.000-04:00");
 
+const displayBacking = document.createElement('div');
+displayBacking.className = "mainBacking";
+
+document.body.appendChild(displayBacking);
+
 const display = document.createElement('div');
 display.className = "mainContainer";
 
-document.body.appendChild(display);
+displayBacking.appendChild(display);
 
 const makeNumber = () => {
 	const backing = document.createElement('span');
@@ -138,7 +143,11 @@ const resize = () => {
 	const max = 576;
 	const width = window.innerWidth;
 	display.style.transform = "translateX(-50%)";
-	if (width < max) display.style.transform += ` scale(${width / max})`;
+
+	const scale = width / max;
+	if (width < max) display.style.transform += ` scale(${scale})`;
+
+	display.style.height = Math.ceil(window.innerHeight/scale) + "px";
 }
 resize();
 window.addEventListener('resize', resize);
