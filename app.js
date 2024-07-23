@@ -146,8 +146,6 @@ const resize = () => {
 
 	const scale = width / max;
 	if (width < max) display.style.transform += ` scale(${scale})`;
-
-	display.style.height = Math.ceil(window.innerHeight/scale) + "px";
 }
 resize();
 window.addEventListener('resize', resize);

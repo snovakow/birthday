@@ -9,10 +9,7 @@ body {
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	bottom: 0px;
 	right: 0px;
-	overflow-x: visible;
-	overflow-y: auto;
 }
 
 .mainContainer {
@@ -21,11 +18,8 @@ body {
 	flex-direction: column;
 	top: 0px;
 	left: 50%;
-	min-height: 100%;
-	overflow: visible;
 	transform: translateX(-50%);
 	transform-origin: top;
-	background-image: linear-gradient(to right, #ffefee 0%, white, #ffefee 100%);
 }
 
 .number {
