@@ -1,4 +1,3 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
@@ -6,7 +5,7 @@ module.exports = {
 	mode: "production",
 	entry: './main.js',
 	output: {
-		filename: '[chunkhash].js',
+		filename: 'main.js',
 		path: path.resolve(__dirname, '../../live/rayapapaya'),
 		chunkFilename: '[chunkhash].js',
 		clean: true,
@@ -15,11 +14,9 @@ module.exports = {
 	plugins: [
 		new CopyPlugin({
 			patterns: [
-				{ from: 'main.css', to: 'main.css' }
+				{ from: 'main.css', to: 'main.css' },
+				{ from: 'index.html', to: 'index.html' }
 			]
-		}),
-		new HtmlWebpackPlugin({
-			title: ""
 		})
-	],
+	]
 };
