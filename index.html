@@ -1,14 +1,29 @@
 <!doctype html>
-<html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js), on the live site only -->
+    <script>
+      if (location.host === 'snovakow.com') {
+        const gtagScript = document.createElement('script')
+        gtagScript.async = true
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-DV1KLMY93N'
+        document.head.prepend(gtagScript)
 
-<head>
-	<title>Raya Papaya</title>
-	<script src="main.js?0.3.2"></script>
+        window.dataLayer = window.dataLayer || []
+        function gtag() { dataLayer.push(arguments) }
+        gtag('js', new Date())
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-</head>
+        gtag('config', 'G-DV1KLMY93N')
+      }
+    </script>
 
-<body></body>
-
+    <meta charset="UTF-8" />
+    <meta name="description" content="Raya Papaya: how old Raya is, counted live in years, months, weeks, days, hours, minutes and seconds." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raya Papaya</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
